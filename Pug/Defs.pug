@@ -78,14 +78,24 @@ Defs
 
   +Def("PawnKind", "Creepers_CreeperPawnKind", "creeper")(ParentName="AnimalKindBase")
     race Creepers_Creeper
-    combatPower 300
+    combatPower 200
     lifeStages
       li
         bodyGraphicData
           texPath Creepers/Creeper/Creeper
-          drawSize 1
+          drawSize 1.2
         dessicatedBodyGraphicData
           texPath Creepers/Creeper/Creeper
-          drawSize 1
+          drawSize 1.2
 
-  
+  +Def("Incident", "Creepers_Herd", "creeper herd")
+    targetTags
+      li Map_PlayerHome
+    workerClass Creepers.IncidentWorkers.Herd
+    baseChance 7
+    category ThreatBig
+    letterLabel Creeper Herd
+    letterText A herd of wandering creepers have entered the area!
+    letterDef ThreatBig
+    minThreatPoints 100
+    pointsScaleable true

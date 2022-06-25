@@ -13,4 +13,13 @@ namespace Creepers
             DefOfHelper.EnsureInitializedInCtor(typeof(RimWorld.JobDefOf));
         }
     }
+    [DefOf]
+    internal static class PawnKindDefOf
+    {
+        public static PawnKindDef Creepers_CreeperPawnKind;
+        static PawnKindDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(RimWorld.PawnKindDefOf));
+        }
+    }
 }
