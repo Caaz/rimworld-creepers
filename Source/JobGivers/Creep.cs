@@ -33,6 +33,7 @@ namespace Creepers.JobGivers
 
             return !(
                 target.Dead
+                || target.kindDef != PawnKindDefOf.Creepers_CreeperPawnKind
                 || !hunter.CanSee(target)
                 || !hunter.CanReach(target, PathEndMode.OnCell, Danger.Deadly)
             );
