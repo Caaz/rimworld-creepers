@@ -5,6 +5,43 @@ Defs
     driverClass Creepers.JobDrivers.Creep
     reportString creeping
 
+
+  +Def("Sound", "Creepers_Creeper_Hurt")
+    context MapOnly
+    subSounds
+      li
+        volumeRange 20~28
+        pitchRange 0.8~1.1
+        distRange 0~50
+        sustainLoop False
+        grains
+          li(Class="AudioGrain_Folder")
+            clipFolderPath Creepers/Creeper_Hurt
+
+  +Def("Sound", "Creepers_Creeper_Death")
+    context MapOnly
+    subSounds
+      li
+        volumeRange 20~28
+        pitchRange 0.8~1.1
+        distRange 0~50
+        sustainLoop False
+        grains
+          li(Class="AudioGrain_Clip")
+            clipPath Creepers/Creeper_death
+
+  +Def("Sound", "Creepers_Creeper_Fuse")
+    context MapOnly
+    subSounds
+      li
+        volumeRange 20~28
+        pitchRange 0.8~1.1
+        distRange 0~50
+        sustainLoop False
+        grains
+          li(Class="AudioGrain_Clip")
+            clipPath Creepers/Creeper_fuse
+
   +Def("Thing", "Creepers_Creeper", "creeper")(ParentName="AnimalThingBase")
     statBases
       MoveSpeed 3.5
@@ -13,14 +50,17 @@ Defs
       baseHungerRate 0
       hasGenders false
       thinkTreeMain Creepers_ThinkTree_Creeper
+      soundMeleeHitPawn Pawn_Melee_SmallScratch_HitPawn
+      soundMeleeHitBuilding Pawn_Melee_SmallScratch_HitBuilding
+      soundMeleeMiss Pawn_Melee_SmallScratch_Miss
       lifeStageAges
         li
           def AnimalAdult
           minAge 0
-          //- soundWounded
-          //- soundDeath
-          //- soundCall
-          //- soundAngry
+          soundWounded Creepers_Creeper_Hurt
+          soundDeath Creepers_Creeper_Death
+          soundCall Creepers_Creeper_Fuse
+          soundAngry Creepers_Creeper_Fuse
 
   +ThinkTreeDef("Creepers_ThinkTree_Creeper")
     //- Standard
@@ -44,10 +84,8 @@ Defs
         bodyGraphicData
           texPath Creepers/Creeper/Creeper
           drawSize 1
-          color (255,255,255)
         dessicatedBodyGraphicData
-          texPath  Creepers/Creeper/Creeper
+          texPath Creepers/Creeper/Creeper
           drawSize 1
-          color (200,100,100)
 
   
