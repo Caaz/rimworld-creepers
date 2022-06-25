@@ -1,12 +1,12 @@
 using HugsLib;
 
-namespace MyMod
+namespace Creepers
 {
     public class Mod : ModBase
     {
         public override void DefsLoaded()
         {
-            Logger.Message("Hello, World!");
+            Logger.Message("Creepers Ready!");
         }
     }
 }
