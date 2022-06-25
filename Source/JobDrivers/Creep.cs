@@ -4,7 +4,7 @@ using Verse;
 using Verse.AI;
 using RimWorld;
 
-namespace Creepers.JobDriver
+namespace Creepers.JobDrivers
 {
     internal class Creep : Verse.AI.JobDriver
     {
@@ -24,7 +24,7 @@ namespace Creepers.JobDriver
         private void Explode()
         {
             // Do a boom
-            GenExplosion.DoExplosion(pawn.Position, pawn.Map, 1.9f, DamageDefOf.Bomb, pawn, 1, 1, SoundDefOf.Interact_Ignite);
+            GenExplosion.DoExplosion(pawn.Position, pawn.Map, 1.9f, DamageDefOf.Bomb, pawn, 300, 0, SoundDefOf.Interact_Ignite);
             pawn.Destroy();
         }
     }

@@ -2,7 +2,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace Creepers.JobGiver
+namespace Creepers.JobGivers
 {
     internal class Creep : ThinkNode_JobGiver
     {

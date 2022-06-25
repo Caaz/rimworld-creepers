@@ -1,7 +1,7 @@
 {
     "default": {
         "name": "Creepers",
-        "author": "Caaz, Probably ShoujoDev",
+        "author": "Caaz, ShoujoDev, Daikon454",
         "description": "Adds Minecraft Creepers to Rimworld",
         "version": "1.0.0.0",
         "packageId": "caaz.creepers",

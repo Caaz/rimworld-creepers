@@ -6,47 +6,48 @@ Defs
     reportString creeping
 
   +Def("Thing", "Creepers_Creeper", "creeper")(ParentName="AnimalThingBase")
+    statBases
+      MoveSpeed 3.5
     race
+      body QuadrupedAnimalWithHooves
       baseHungerRate 0
       hasGenders false
       thinkTreeMain Creepers_ThinkTree_Creeper
-    lifeStageAges
-      li
-        def AnimalAdult
-        minAge 0
-        //- soundWounded
-        //- soundDeath
-        //- soundCall
-        //- soundAngry
+      lifeStageAges
+        li
+          def AnimalAdult
+          minAge 0
+          //- soundWounded
+          //- soundDeath
+          //- soundCall
+          //- soundAngry
 
-+ThinkTreeDef("Creepers_ThinkTree_Creeper")
-  //- Standard
-  +ThinkNode("ThinkNode_ConditionalMustKeepLyingDown")
-    +ThinkNode("JobGiver_KeepLyingDown")
-  +ThinkNodeSubtree("Downed")
-  +ThinkNodeSubtree("BurningResponse")
-  +ThinkNode("ThinkNode_QueuedJob")
-  //- Jobs
-  +ThinkNode("Creepers.JobGiver.Creep")
-  //- Wander
-  +ThinkNode("ThinkNode_Tagger",{tagToGive:"Idle"})
-    +ThinkNode("JobGiver_WanderAnywhere", {maxDanger:"Deadly",ticksBetweenWandersRange:"120~240"})
-  +ThinkNode("JobGiver_IdleError")
+  +ThinkTreeDef("Creepers_ThinkTree_Creeper")
+    //- Standard
+    +ThinkNode("ThinkNode_ConditionalMustKeepLyingDown")
+      +ThinkNode("JobGiver_KeepLyingDown")
+    +ThinkNodeSubtree("Downed")
+    +ThinkNodeSubtree("BurningResponse")
+    +ThinkNode("ThinkNode_QueuedJob")
+    //- Jobs
+    +ThinkNode("Creepers.JobGivers.Creep")
+    //- Wander
+    +ThinkNode("ThinkNode_Tagger",{tagToGive:"Idle"})
+      +ThinkNode("JobGiver_WanderAnywhere", {maxDanger:"Deadly",ticksBetweenWandersRange:"120~240"})
+    +ThinkNode("JobGiver_IdleError")
 
   +Def("PawnKind", "Creepers_CreeperPawnKind", "creeper")(ParentName="AnimalKindBase")
     race Creepers_Creeper
+    combatPower 300
     lifeStages
       li
         bodyGraphicData
-          texPath Things/Pawn/Animal/Bear/Bear 
-          //- #{name}/Creeper/Creeper
+          texPath Creepers/Creeper/Creeper
           drawSize 1
-          color (40,240,10)
-          shadowData
-            volume (0.4, 0.3, 0.3)
-            offset (0,0,-.1)
+          color (255,255,255)
         dessicatedBodyGraphicData
-          texPath Things/Pawn/Animal/Bear/Dessicated_Bear
+          texPath  Creepers/Creeper/Creeper
           drawSize 1
+          color (200,100,100)
 
   
