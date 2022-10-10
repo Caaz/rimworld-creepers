@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+  tags:
+    - '*'
+
+env:
+  # Rimworld's Steam App ID
+  STEAM_APP_ID: 294100
+
+jobs:
+  build:
+    uses: ./.github/workflows/Build.yml
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: Typhon
+
+    - name: Set Environment Variables
+      run: |
+        echo "workshop_id=$(cat About/PublishedFileId.txt)" >> $GITHUB_ENV
+        echo "mod_name=$(ls ..)" >> $GITHUB_ENV
+
+    - name: Prepare for Distribution
+      run: |
+        mkdir ${{ env.mod_name }}
+        mv $(ls -I ${{ env.mod_name }}) ${{ env.mod_name }}
+        7z a ${{ env.mod_name }}.zip ${{ env.mod_name }}
+
+    - name: Create Workshop Release
+      if: env.workshop_id
+      uses: weilbyte/steam-workshop-upload@v1
+      with:
+        appid: ${{ env.STEAM_APP_ID }}
+        itemid: ${{ env.workshop_id }}
+        path: ${{ env.mod_name }}
+      env:
+        STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+        STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+        STEAM_TFASEED: ${{ secrets.STEAM_TFASEED }}
+
+    - name: Read Metadata
+      uses: antifree/json-to-variables@v1.0.1
+      with:
+        filename: 'metadata.json'
+        prefix: metadata
+
+    - name: Create Release
+        uses: ncipollo/release-action@v1.11
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          name: ${{ env.metadata_default_name }}
+          tag: ${{ env.metadata_default_version }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          artifacts: ${{ env.mod_name }}.zip
