@@ -10,20 +10,27 @@ on:
 jobs:
   build:
     runs-on: windows-2019
+
     steps:
+
     - uses: actions/checkout@v2
       with:
         submodules: true
+
     - name: Read Metadata
       uses: antifree/json-to-variables@v1.0.1
       with:
         filename: 'metadata.json'
         prefix: metadata
-    - run: |
+
+    - name: Build application
+      run: |
         npm install
         npm run buildpug production
         npm run buildsource
-    - uses: actions/upload-artifact@v2
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
       with:
         name: ${{ env.metadata_default_name }}
         path: |
