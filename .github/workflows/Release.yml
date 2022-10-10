@@ -56,11 +56,11 @@ jobs:
         prefix: metadata
 
     - name: Create Release
-        uses: ncipollo/release-action@v1.11
-        with:
-          token: ${{ secrets.REPO_TOKEN }}
-          name: ${{ env.metadata_default_name }}
-          tag: ${{ env.metadata_default_version }}
-          generateReleaseNotes: true
-          allowUpdates: true
-          artifacts: ${{ env.mod_name }}.zip
+      uses: ncipollo/release-action@v1.11
+      with:
+        token: ${{ secrets.REPO_TOKEN }}
+        name: ${{ env.metadata_default_name }}
+        tag: ${{ env.metadata_default_version }}
+        generateReleaseNotes: true
+        allowUpdates: true
+        artifacts: ${{ env.mod_name }}.zip
