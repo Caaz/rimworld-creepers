@@ -4,7 +4,8 @@ on:
   workflow_dispatch: {}
   push:
     branches:
-      - main
+      # - main
+      - '**'
     tags:
       - '*'
 
@@ -21,10 +22,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Read Metadata
+      uses: antifree/json-to-variables@v1.0.1
+      with:
+        filename: 'metadata.json'
+        prefix: metadata
+
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        name: Typhon
+        name: ${{ env.metadata_default_name }}
 
     - name: Set Environment Variables
       run: |
@@ -48,12 +55,6 @@ jobs:
     #     STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
     #     STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
     #     STEAM_TFASEED: ${{ secrets.STEAM_TFASEED }}
-
-    - name: Read Metadata
-      uses: antifree/json-to-variables@v1.0.1
-      with:
-        filename: 'metadata.json'
-        prefix: metadata
 
     - name: Create Release
       uses: ncipollo/release-action@v1.11.1

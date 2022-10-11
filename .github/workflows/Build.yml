@@ -5,8 +5,7 @@ on:
   workflow_call: {}
   push:
     branches:
-      # - main
-      - '**'
+      - main
   pull_request:
     branches:
       - main
