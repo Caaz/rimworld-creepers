@@ -5,7 +5,7 @@ obj
 node_modules
 
 # Ignore built files
-Assemblies
+1.4/Assemblies
 *.xml
 *.csproj
 
