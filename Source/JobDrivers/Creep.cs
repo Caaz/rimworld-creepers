@@ -24,8 +24,15 @@ namespace Creepers.JobDrivers
         private void Explode()
         {
             // Do a boom
-            GenExplosion.DoExplosion(pawn.Position, pawn.Map, 1.9f, DamageDefOf.Bomb, pawn, 300, 0, SoundDefOf.Interact_Ignite);
-            pawn.Destroy();
+            try
+            {
+                GenExplosion.DoExplosion(pawn.Position, pawn.Map, 1.9f, DamageDefOf.Bomb, pawn, 300, 0, SoundDefOf.Interact_Ignite);
+                pawn.Destroy();
+            }
+            catch (Exception e)
+            {
+                Log.Message("Failed to explode? " + e);
+            }
         }
     }
 }
